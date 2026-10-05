@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DayFlow – Personal Daily Planner</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%93%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+</head>
+
+<body>
+
+  <!-- ============ LOGIN ============ -->
+  <div id="loginScreen" class="login">
+    <div class="login-hero">
+      <div class="brand big"><span class="logo">🗓</span> DayFlow</div>
+      <h1>Plan your day.<br>Build your habits.<br>Own your time.</h1>
+      <p>Tasks, calendar, habits, hydration, focus timer and daily reviews — all in one calm dashboard.</p>
+      <ul class="hero-points">
+        <li>✅ Tasks with priorities &amp; reminders</li>
+        <li>📅 Month / week / day calendar</li>
+        <li>🔄 Habit streaks &amp; heatmap</li>
+        <li>⏱ Pomodoro focus statistics</li>
+      </ul>
+    </div>
+    <div class="login-card">
+      <div class="login-card-header">
+        <div class="db-status-badge" id="dbStatusBadge">
+          <span class="db-dot"></span>
+          <span id="dbStatusText">SQLite DB Ready</span>
+        </div>
+        <h2 id="authTitle">Welcome to DayFlow</h2>
+        <p class="muted" id="authSubtitle">Sign in to your private planner</p>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" id="tabSignIn" role="tab" aria-selected="true">Sign In</button>
+        <button type="button" class="auth-tab" id="tabSignUp" role="tab" aria-selected="false">Create Account</button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="signInForm" class="auth-form">
+        <div class="field">
+          <label for="loginUser">Username or Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input id="loginUser" name="username" type="text" placeholder="Enter username or email"
+              autocomplete="username" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="loginPass">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input id="loginPass" name="password" type="password" placeholder="Enter password"
+              autocomplete="current-password" required>
+            <button type="button" class="pwd-toggle" data-target="loginPass"
+              aria-label="Toggle password visibility">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn primary wide auth-submit-btn" id="loginSubmitBtn">
+          <span>Sign In</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signUpForm" class="auth-form hidden">
+        <div class="field">
+          <label for="regName">Full Name</label>
+          <div class="input-wrap">
+            <span class="input-icon">✨</span>
+            <input id="regName" name="name" type="text" placeholder="e.g. Karthik" autocomplete="name" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="regUser">Username</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input id="regUser" name="username" type="text" placeholder="Choose a username" autocomplete="username"
+              required minlength="2">
+          </div>
+        </div>
+        <div class="field">
+          <label for="regEmail">Email (Optional)</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉️</span>
+            <input id="regEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email">
+          </div>
+        </div>
+        <div class="field">
+          <label for="regPass">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input id="regPass" name="password" type="password" placeholder="At least 4 characters"
+              autocomplete="new-password" required minlength="4">
+            <button type="button" class="pwd-toggle" data-target="regPass"
+              aria-label="Toggle password visibility">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn primary wide auth-submit-btn" id="regSubmitBtn">
+          <span>Create Account</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+
+      <div id="authAlert" class="auth-alert hidden"></div>
+
+      <div class="or"><span>or</span></div>
+      <button id="demoBtn" class="btn ghost wide demo-action-btn" type="button">⚡ Try Demo Mode (Local Storage)</button>
+      <div id="setupNote" class="setup-note hidden"></div>
+      <div class="db-footer-info">
+        <span>💾 Powered by SQLite Database (<code>dayflow.db</code>)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="brand"><span class="logo">🗓</span> DayFlow</div>
+      <nav id="sideNav"></nav>
+      <div class="side-foot">
+        <div id="sideUser" class="side-user"></div>
+      </div>
+    </aside>
+    <div id="scrim" class="scrim" data-action="closeMenu"></div>
+
+    <main class="main">
+      <header id="header" class="header"></header>
+      <div id="banner"></div>
+      <div id="view" class="view"></div>
+    </main>
+
+    <aside id="rightPanel" class="right"></aside>
+
+    <nav id="bottomNav" class="bottom-nav"></nav>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="searchRoot"></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

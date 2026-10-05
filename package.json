@@ -1,0 +1,13 @@
+{
+  "name": "dayflow-planner",
+  "version": "1.0.0",
+  "description": "DayFlow Planner with SQLite Database Authentication and Data Persistence",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["planner", "sqlite", "todo", "habits", "dashboard"],
+  "author": "",
+  "license": "MIT"
+}
